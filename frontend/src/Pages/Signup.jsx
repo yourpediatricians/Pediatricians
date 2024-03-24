@@ -26,7 +26,6 @@ function Signup() {
     }
 
     fetch('http://localhost:3000/users', {
-      mode: "no-cors",
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

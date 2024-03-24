@@ -1,5 +1,6 @@
 const express = require('express')
 const dotenv = require('dotenv')
+const cors = require('cors')
 const cookieParser = require('cookie-parser')
 
 const userRoutes = require('./routes/userRoutes')
@@ -10,9 +11,17 @@ const app = express()
 dotenv.config()
 connectDB()
 
+var corsOptions = {
+    origin: 'http://localhost:5173',
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
+    optionsSuccessStatus: 204
+}
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
+app.use(cors(corsOptions))
 
 app.use('/users', userRoutes)
 
