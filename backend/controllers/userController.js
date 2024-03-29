@@ -3,7 +3,7 @@ const User = require('../models/userModel')
 const generateToken = require('../utils/generateToken')
 
 module.exports.registerUser = async (req, res) => {
-  const { name, email, password } = req.body
+  const { mobile, name, email, password } = req.body
 
   const userExists = await User.findOne({ email })
 
@@ -12,7 +12,7 @@ module.exports.registerUser = async (req, res) => {
     throw new Error('User already exists')
   }
 
-  const newUser = await User.create({ name, email, password })
+  const newUser = await User.create({ mobile, name, email, password })
 
   if (newUser) {
     generateToken(res, newUser._id)
@@ -23,15 +23,15 @@ module.exports.registerUser = async (req, res) => {
     })
   } else {
     res.status(400)
-    throw new Error ('Invalid user data')
+    throw new Error('Invalid user data')
   }
 }
 
-module.exports.loginUser = async(req, res) => {
-  const {email, password} = req.body
-  const user = await User.findOne({email})
+module.exports.loginUser = async (req, res) => {
+  const { email, password } = req.body
+  const user = await User.findOne({ email })
 
-  if(user && (await user.matchPassword(password))) {
+  if (user && (await user.matchPassword(password))) {
     generateToken(res, user._id)
     res.json({
       _id: user._id,
@@ -46,5 +46,15 @@ module.exports.loginUser = async(req, res) => {
 }
 
 module.exports.logoutUser = (req, res) => {
-  
+  res.cookie('jwt', '',{
+    httpOnly: true,
+    expires: new Date(0)
+  })
+  res.status(200).json({message: 'Logged out successfully'})
+}
+
+module.exports.getUserProfile = (req, res) => {
+  res.json({
+    profile: 'sss'
+  })
 }

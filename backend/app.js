@@ -3,16 +3,16 @@ const dotenv = require('dotenv')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
 
-const userRoutes = require('./routes/userRoutes')
-
 const connectDB = require('./config/database')
+
+const userRoutes = require('./routes/userRoutes')
 
 const app = express()
 dotenv.config()
 connectDB()
 
 var corsOptions = {
-    origin: 'http://localhost:5173',
+    origin: process.env.FRONTEND_LINK,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: false,
     optionsSuccessStatus: 204

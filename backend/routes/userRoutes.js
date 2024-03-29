@@ -1,6 +1,7 @@
 const express = require('express')
 
-const { registerUser } = require('../controllers/userController')
+const { registerUser, loginUser, logoutUser, getUserProfile } = require('../controllers/userController')
+const {authProtect} = require('../middlewares/authProtect')
 
 const router = express.Router()
 
@@ -8,13 +9,13 @@ router.route('/')
   .post(registerUser)
 
 router.route('/login')
-  .post()
+  .post(loginUser)
 
 router.route('/logout')
-  .post()
+  .post(logoutUser)
 
 router.route('/profile')
-  .get()
+  .get(authProtect, getUserProfile)
   .put()
 
 module.exports = router
