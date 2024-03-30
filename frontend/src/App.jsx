@@ -1,21 +1,19 @@
-import Navbar from "./Components/Navbar"
-import Slideshow from "./Components/Slideshow"
-import Home from "./Pages/Home"
-import { Route, Routes } from "react-router-dom"
-import Login from "./Pages/Login"
-import Signup from "./Pages/Signup"
+import Navigation from './components/Navigation/Navigation.component'
+import MainHeader from './components/MainHeader/MainHeader.component'
+import SiteAwards from './components/SiteAwards/SiteAwards.component'
+import Benefits from './components/Benefits/Benefits.component'
+
+import './App.css'
+
 function App() {
-  return <>
-    {/* <div className="underline">App</div> */}
-    <Routes>
-      <Route path="/" element={<Navbar />}>
-        <Route index element={<Home />} />
-        <Route path="login" element={<Login />} />
-        <Route path="signup" element={<Signup />} />
-      </Route>
-      {/* <Route path='login' element={<Login />} /> */}
-    </Routes>
-  </>
+  return (
+    <>
+      <Navigation />
+      <MainHeader />
+      <SiteAwards />
+      <Benefits />
+    </>
+  )
 }
 
 export default App
