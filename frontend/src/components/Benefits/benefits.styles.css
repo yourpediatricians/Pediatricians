@@ -1,0 +1,32 @@
+.benefit-lg {
+  display: none;
+}
+
+@media(min-width: 992px) {
+  .benefit-lg {
+    display: flex;
+  }
+
+  .benefit {
+    display: none;
+  }
+}
+
+.cross {
+  position: relative;
+  display: inline-block;
+}
+
+.cross::before {
+  content: '';
+  width: 100%;
+  position: absolute;
+  right: 0;
+  top: 50%;
+}
+
+.cross::before {
+  border-bottom: 4px solid rgb(227, 223, 111);
+  -webkit-transform: skewY(-10deg);
+  transform: skewY(-10deg);
+}

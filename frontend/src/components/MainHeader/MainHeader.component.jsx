@@ -2,7 +2,7 @@ import { Button, Image } from "react-bootstrap"
 
 function MainHeader() {
   return (
-    <main style={{ backgroundColor: '#DDF2EB' }}>
+    <main style={{ backgroundColor: '#f4f2f0' }}>
       <div className="row">
         <div className="col-5 col-lg-6">
           <div className="d-flex align-items-center justify-content-center">

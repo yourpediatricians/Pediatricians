@@ -2,6 +2,7 @@ import Navigation from './components/Navigation/Navigation.component'
 import MainHeader from './components/MainHeader/MainHeader.component'
 import SiteAwards from './components/SiteAwards/SiteAwards.component'
 import Benefits from './components/Benefits/Benefits.component'
+import TeamInfo from './components/TeamInfo/TeamInfo.component'
 
 import './App.css'
 
@@ -12,6 +13,7 @@ function App() {
       <MainHeader />
       <SiteAwards />
       <Benefits />
+      <TeamInfo />
     </>
   )
 }
