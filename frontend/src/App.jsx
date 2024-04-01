@@ -7,6 +7,8 @@ import ParentReviews from './components/ParentReviews/ParentReviews.component'
 import Working from './components/Working/Working.component'
 import FeaturesIncluded from './components/FeaturesIncluded/FeaturesIncluded.component'
 import PriceSavings from './components/PriceSavings/PriceSavings.component'
+import Faqs from './components/Faqs/Faqs.component'
+import Footer from './components/Footer/Footer.component'
 
 import './App.css'
 
@@ -22,6 +24,8 @@ function App() {
       <Working />
       <FeaturesIncluded />
       <PriceSavings />
+      <Faqs />
+      <Footer />
     </>
   )
 }

@@ -13,15 +13,7 @@ function FeaturesIncluded() {
     {
       mainText: 'Oral thermometer',
       subText: "Quick, and with a flexible tip -just in case you don't have one at home"
-    },
-    {
-      mainText: 'Forehead thermometer',
-      subText: 'Annual Memberships Only. 1-second readings and easy to use'
-    },
-    {
-      mainText: 'Digital Rx savings card',
-      subText: 'Save up to 80% on medications'
-    },
+    }
   ]
 
   return (

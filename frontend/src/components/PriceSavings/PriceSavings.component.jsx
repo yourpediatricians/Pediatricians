@@ -8,7 +8,7 @@ function PriceSavings() {
           How much can WePediatrics save my family?
         </h1>
         <div className='mb-3'>
-          Families save $281 per year on average in copays and unexpected bills by becoming Blueberry members! That's because with Blueberry, there are no visit fees, no after hour fees, and no copays - no kidding! Never worry about whether or not a call with a Pediatrician is going to cost you.
+          Families save $281 per year on average in copays and unexpected bills by becoming WePediatrics members! That's because with WePediatrics, there are no visit fees, no after hour fees, and no copays - no kidding! Never worry about whether or not a call with a Pediatrician is going to cost you.
         </div>
         <div className="row align-items-center fs-5 text-center">
           <div className="col-12 col-lg-4 mb-3 mb-lg-0">
