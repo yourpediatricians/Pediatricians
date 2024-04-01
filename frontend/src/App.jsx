@@ -3,6 +3,10 @@ import MainHeader from './components/MainHeader/MainHeader.component'
 import SiteAwards from './components/SiteAwards/SiteAwards.component'
 import Benefits from './components/Benefits/Benefits.component'
 import TeamInfo from './components/TeamInfo/TeamInfo.component'
+import ParentReviews from './components/ParentReviews/ParentReviews.component'
+import Working from './components/Working/Working.component'
+import FeaturesIncluded from './components/FeaturesIncluded/FeaturesIncluded.component'
+import PriceSavings from './components/PriceSavings/PriceSavings.component'
 
 import './App.css'
 
@@ -14,6 +18,10 @@ function App() {
       <SiteAwards />
       <Benefits />
       <TeamInfo />
+      <ParentReviews />
+      <Working />
+      <FeaturesIncluded />
+      <PriceSavings />
     </>
   )
 }

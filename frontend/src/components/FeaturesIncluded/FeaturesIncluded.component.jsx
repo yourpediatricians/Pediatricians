@@ -1,0 +1,58 @@
+import { Image } from "react-bootstrap"
+
+function FeaturesIncluded() {
+  const features = [
+    {
+      mainText: 'Unlimited 24/7 care',
+      subText: 'Get help with anything, big or small'
+    },
+    {
+      mainText: 'Pulse oximeter',
+      subText: 'Assess heartrate, oxygen, and breathing'
+    },
+    {
+      mainText: 'Oral thermometer',
+      subText: "Quick, and with a flexible tip -just in case you don't have one at home"
+    },
+    {
+      mainText: 'Forehead thermometer',
+      subText: 'Annual Memberships Only. 1-second readings and easy to use'
+    },
+    {
+      mainText: 'Digital Rx savings card',
+      subText: 'Save up to 80% on medications'
+    },
+  ]
+
+  return (
+    <section>
+      <div className="container my-5">
+        <div className="row row-cols-1 row-cols-md-2">
+          <div className="col-12 col-lg-5 col-xl-6 order-2 order-md-1 p-3">
+            <h1 className="mb-4 fw-bold">What's included</h1>
+            <div className="fs-5">
+              {
+                features.map((feature, i) => <div key={i} className="row mb-4">
+                  <div className="col-3 col-xl-2"><Image src="https://placehold.co/100x100" fluid /></div>
+                  <div className="col-9 col-xl-8">
+                    <div>{feature.mainText}</div>
+                    <div className="fs-6 text-muted">{feature.subText}</div>
+                  </div>
+                </div>)
+              }
+            </div>
+          </div>
+          <div className="col-12 col-lg-7 col-xl-6 order-1 order-md-2  mb-5 mb-md-0 align-self-center">
+            <div className="container">
+              <div className="w-100 text-center">
+                <Image src='https://placehold.co/500x500' fluid />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export default FeaturesIncluded
