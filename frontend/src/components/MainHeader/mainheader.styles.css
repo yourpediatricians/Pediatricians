@@ -1,7 +1,14 @@
 .main-header-mobile {
-  background-image: url('https://placehold.co/600x400');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)), url('../../assets/mainImageMobile.jpg');
   background-size: cover;
   background-position: center;
+}
+
+
+.bg-img {
+  background: url('../../assets/mainImage.jpg') no-repeat center;
+  background-size: cover;
+  background-position: bottom;
 }
 
 .main-header {
@@ -9,9 +16,10 @@
 }
 
 @media(min-width: 992px) {
-  .main-header{
+  .main-header {
     display: block;
   }
+
   .main-header-mobile {
     display: none;
   }

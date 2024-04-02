@@ -1,3 +1,4 @@
+import kitImage from '../../assets/kitImage.png'
 import { Image } from "react-bootstrap"
 
 import './benefits.styles.css'
@@ -28,13 +29,13 @@ function Benefits() {
     <section style={{backgroundColor: '#235aff'}} className="text-white">
       <div className="row benefit-lg me-0">
         <div className="col-7 p-5 pb-0 d-flex flex-column justify-content-between">
-          <div className="ms-5 ps-5">
+          <div className="ms-5 ps-5 pt-5">
             <h1 className="fw-bold">{heading}</h1>
             <p className="fs-4">{info}</p>
           </div>
           <div className="row">
-            <div className="col-xl-8 col-10 offset-2">
-              <Image src="https://placehold.co/1200x1200" fluid />
+            <div className="col-xl-8 col-10 offset-2 pb-5">
+              <Image src={kitImage} fluid className='kit-image'/>
             </div>
           </div>
         </div>
@@ -61,7 +62,7 @@ function Benefits() {
           }
         </div>
         <div>
-          <Image src="https://placehold.co/1200x1200" fluid />
+          <Image src={kitImage} fluid className='kit-image'/>
         </div>
       </div>
     </section>
