@@ -10,11 +10,11 @@ function Navigation() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/">Home</Nav.Link>
-            <Nav.Link href="#link">Join Us</Nav.Link>
+            <Nav.Link href="/signup">Join Us</Nav.Link>
           </Nav>
           <Nav>
             <Link to='/login'><Button className='ms-3'>Log In</Button></Link>
-            <Button className='ms-3'>Get Started</Button>
+            <Link to='/signup'><Button className='ms-3'>Get Started</Button></Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
