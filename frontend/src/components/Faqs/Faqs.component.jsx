@@ -5,11 +5,11 @@ import './faqs.styles.css'
 function Faqs() {
   const questions = [
     {
-      ques: 'How much does WePediatrics Cost?',
-      ans: "WePediatrics's membership costs ₹999 per month or ₹8500 per year, plus a one-time fee for your at-home medical kit (₹800). There are no per-visit fees or copays regardless of your insurance coverage; no matter how much you use WePediatrics or how many children you have, you'll never be charged any additional fees."
+      ques: 'How much does Wepediatrics Cost?',
+      ans: "Wepediatrics's membership costs ₹999 per month or ₹8500 per year, plus a one-time fee for your at-home medical kit (₹800). There are no per-visit fees or copays regardless of your insurance coverage; no matter how much you use Wepediatrics or how many children you have, you'll never be charged any additional fees."
     },
     {
-      ques: 'Can I cancel my WePediatrics membership?',
+      ques: 'Can I cancel my Wepediatrics membership?',
       ans: 'While we would be sad to see you go, you can easily cancel your membership online at any time via your account page. There are no complicated hoops to jump through or phone calls you have to make.'
     }
   ]

@@ -13,15 +13,15 @@ function Benefits() {
     },
     {
       heading: 'Surprise fees',
-      info: 'There are no fees, copays, or limits. An entire month of WePediatrics is often less than the cost of a single urgent care visit!'
+      info: 'There are no fees, copays, or limits. An entire month of Wepediatrics is often less than the cost of a single urgent care visit!'
     },
     {
       heading: 'Office closed',
-      info: 'As a member you get access to WePediatrics 24/7, 365 days of the year. Even on Holidays.'
+      info: 'As a member you get access to Wepediatrics 24/7, 365 days of the year. Even on Holidays.'
     },
     {
       heading: 'False promises',
-      info: 'If you don’t like WePediatrics we’ll refund your membership. We have a 100% satisfaction guarantee policy.'
+      info: 'If you don’t like Wepediatrics we’ll refund your membership. We have a 100% satisfaction guarantee policy.'
     }
   ]
 

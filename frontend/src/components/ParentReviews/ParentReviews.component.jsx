@@ -72,7 +72,7 @@ function ParentReviews() {
   return (
     <section className='text-white' style={{ backgroundColor: '#235aff' }}>
       <div className="container py-5">
-        <h1 className='fw-bold'>Why Parents Love WePediatrics</h1>
+        <h1 className='fw-bold'>Why Parents Love Wepediatrics</h1>
         <div className='fs-5'>* * * * * 4.5</div>
         <div className="slider-container my-5">
           <Slider {...settings} >

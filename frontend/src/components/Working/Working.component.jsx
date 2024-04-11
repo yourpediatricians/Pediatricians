@@ -7,7 +7,7 @@ function Working() {
       <div className="container my-5">
         <div className="row row-cols-1 row-cols-lg-2">
           <div className="col-lg-5 col-xl-6 p-3 mb-5 mb-lg-0">
-            <h1 className="mb-4 fw-bold">How WePediatrics Works</h1>
+            <h1 className="mb-4 fw-bold">How Wepediatrics Works</h1>
             <ol className="lh-lg mb-5" style={{ fontSize: '1.1em' }}>
               <li>Open the app & answer a few quick questions about your child's symptoms</li>
               <li>Send your child's relevant vitals, ear exam, or photos/video securely via our app</li>
@@ -19,7 +19,7 @@ function Working() {
             <div className="container">
               <Symptoms />
               <div className="w-100 text-center">
-                WePediatrics helps with these symptoms and more!
+                Wepediatrics helps with these symptoms and more!
               </div>
             </div>
           </div>

@@ -7,7 +7,7 @@ function Footer() {
         <div className="row justify-content-center align-items-center mb-4">
           <div className='col-12 col-sm-2 mb-3 mb-sm-0'>
             <div className="d-flex justify-content-center align-items-center">
-              WePediatrics
+              Wepediatrics
             </div>
           </div>
           <div className='col-12 col-sm-8 mb-3 mb-sm-0 d-flex align-items-center justify-content-evenly'>
