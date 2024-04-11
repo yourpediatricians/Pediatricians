@@ -1,4 +1,4 @@
-import { Form, Button, FloatingLabel } from 'react-bootstrap'
+import { Form, Button } from 'react-bootstrap'
 
 function Signup() {
   return (
