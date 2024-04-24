@@ -2,12 +2,16 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 
 const userSchema = mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
   email: {
     type: String,
     required: true,
     unique: true,
   },
-  mobile: {
+  phone: {
     type: String,
     required: true,
     unique: true
@@ -16,9 +20,11 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  name: {
-    type: String,
-    required: true,
+  address: {
+    type: String
+  },
+  plan: {
+    type: String
   }
 }, { timestamps: true, })
 

@@ -14,6 +14,7 @@ connectDB()
 var corsOptions = {
     origin: process.env.FRONTEND_LINK,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true,
     preflightContinue: false,
     optionsSuccessStatus: 204
 }
