@@ -4,8 +4,13 @@ import { useState } from 'react'
 import { Button, Form, Image } from "react-bootstrap"
 import './signupformstep3.styles.css'
 
-function SignupFormStep3() {
-  const [selectedPlan, setSelectedPlan] = useState('plan-monthly')
+function SignupFormStep3({ formData, handleFormDataChange, handleSubmit }) {
+  // const [selectedPlan, setSelectedPlan] = useState('plan-monthly')
+
+  const setSelectedPlan = (value) => {
+    handleFormDataChange({target: {name: 'plan', value: value}})
+  }
+
   return (
     <Form className='p-4 bg-white rounded-5 shadow-lg'>
       <div className="w-100 d-flex mb-3">
@@ -31,23 +36,24 @@ function SignupFormStep3() {
 
       <button onClick={(e) => {
         e.preventDefault()
-        setSelectedPlan('plan-monthly')
-      }} className={`d-block w-100 mb-3 rounded-pill border ${selectedPlan === 'plan-monthly' ? 'selected' : ''}`}>
+        setSelectedPlan('plan-yearly')
+      }}
+        className={`d-block w-100 mb-3 rounded-pill border ${formData.plan === 'plan-yearly' ? 'selected' : ''}`}>
         <div>
-          sdfsd
+          Yearly
         </div>
       </button>
       <button onClick={(e) => {
         e.preventDefault()
-        setSelectedPlan('plan-yearly')
-      }} className={`d-block w-100 mb-3 rounded-pill border ${selectedPlan === 'plan-yearly' ? 'selected' : ''}`}>
+        setSelectedPlan('plan-monthly')
+      }} className={`d-block w-100 mb-3 rounded-pill border ${formData.plan === 'plan-monthly' ? 'selected' : ''}`}>
         <div>
-          sdfsd
+          Monthly
         </div>
       </button>
 
-      <Button variant="primary" type="submit" className='rounded-pill w-100 mt-3'>
-        Next
+      <Button variant="primary" type="submit" className='rounded-pill w-100 mt-3' onClick={handleSubmit}>
+        Confirm
       </Button>
     </Form>
   )

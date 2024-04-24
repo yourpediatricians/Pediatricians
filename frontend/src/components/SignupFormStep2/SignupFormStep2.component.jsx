@@ -4,7 +4,13 @@ import oto_img from '../../assets/tools/oto.png'
 import o2_img from '../../assets/tools/O2.png'
 import therm_img from '../../assets/tools/therm.png'
 
-function SignupFormStep2() {
+function SignupFormStep2({formData, handleFormDataChange, setStep}) {
+
+  const handleNext = (e) => {
+    e.preventDefault()
+    setStep(3)
+  }
+
   return (
     <Form className='p-5 bg-white rounded-5 shadow-lg'>
       <div className="w-100 d-flex mb-3">
@@ -28,15 +34,15 @@ function SignupFormStep2() {
 
       <Form.Group className="mb-3" controlId="formBasicPhone">
         <Form.Label className='mb-0'>Phone:</Form.Label>
-        <Form.Control type="text" className='rounded-pill px-4' />
+        <Form.Control type="text" className='rounded-pill px-4' name='phone' value={formData.phone} onChange={handleFormDataChange}/>
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicAddress">
         <Form.Label className='mb-0'>Address:</Form.Label>
-        <Form.Control type="text" className='rounded-pill px-4' />
+        <Form.Control type="text" className='rounded-pill px-4' name='address' value={formData.address} onChange={handleFormDataChange}/>
       </Form.Group>
 
-      <Button variant="primary" type="submit" className='rounded-pill w-100 mt-3'>
+      <Button variant="primary" type="submit" className='rounded-pill w-100 mt-3' onClick={handleNext}>
         Next
       </Button>
     </Form>
