@@ -1,6 +1,7 @@
 import kitImage from '../../assets/kitImage.png'
 
 import axios from 'axios'
+import { useAuth } from '../../contexts/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { Button, Form, Image } from "react-bootstrap"
@@ -9,12 +10,14 @@ import './joinus.styles.css'
 
 function SignupFormStep3() {
   const navigate = useNavigate()
+  const { curUser, updateCurUser } = useAuth()
   const [selectedPlan, setSelectedPlan] = useState('plan-monthly')
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const res = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/users/info`, {plan: selectedPlan}, { withCredentials: true })
-    if(res.data.success) {
+    const res = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/users/info`, { plan: selectedPlan }, { withCredentials: true })
+    if (res.data.success) {
+      updateCurUser(res.data.userInfo)
       navigate('/')
     }
   }

@@ -1,5 +1,8 @@
 const jwt = require('jsonwebtoken')
+const { OAuth2Client } = require('google-auth-library')
 const User = require('../models/userModel')
+
+const client = new OAuth2Client()
 
 module.exports.authProtect = async (req, res, next) => {
   const token = req.cookies.jwt
@@ -11,12 +14,41 @@ module.exports.authProtect = async (req, res, next) => {
     }
     catch (err) {
       console.error(err)
-      res.status(401)
-      throw new Error('Unauthorized')
+      return res.json({
+        success: false,
+        msg: 'Invalid token'
+      })
+      // throw new Error('Unauthorized')
     }
   }
   else {
-    res.status(401)
-    throw new Error('Unauthorized, no token')
+    return res.json({
+      success: false,
+      msg: 'No token'
+    })
+    // throw new Error('Unauthorized, no token')
   }
+}
+
+module.exports.googleAuthProtect = async (req, res, next) => {
+  try {
+    const token = req.body.credential
+    const ticket = await client.verifyIdToken({
+      idToken: token,
+      audience: process.env.GOOGLE_CLIENT_ID,  // Specify the CLIENT_ID of the app that accesses the backend
+      // Or, if multiple clients access the backend:
+      //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
+    })
+    req.payload = ticket.getPayload()
+    next()
+  }
+  catch (err) {
+    console.log(err)
+    return res.json({
+      success: false,
+      msg: err.msg
+    })
+  }
+  // If request specified a G Suite domain:
+  // const domain = payload['hd'];
 }

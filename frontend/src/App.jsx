@@ -1,4 +1,7 @@
+import axios from 'axios'
+import { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
+import { useAuth } from './contexts/AuthContext'
 
 import Layout from './components/Layout/Layout.component'
 import Home from './components/Home/Home.component'
@@ -9,6 +12,17 @@ import JoinUs from './components/JoinUs/JoinUs.component'
 import './App.css'
 
 function App() {
+  const { curUser, updateCurUser } = useAuth()
+
+  useEffect(() => {
+    async function fetchUserInfo() {
+      const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/users/info`, { withCredentials: true })
+      if (res.data.success)
+        updateCurUser(res.data.userInfo)
+    }
+    fetchUserInfo()
+  }, [])
+
   return (
     <>
       <Routes>

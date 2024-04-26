@@ -4,13 +4,15 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../contexts/AuthContext'
 import { Button, Container, Nav, Navbar } from 'react-bootstrap'
 
+import profile_icon from '../../assets/svgs/person-circle.svg'
+
 function Navigation() {
   const navigate = useNavigate()
   const { curUser, updateCurUser } = useAuth()
   const [expanded, setExpanded] = useState(false)
 
   const logout = async () => {
-    const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/users/logout`)
+    const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/users/logout`, null, { withCredentials: true })
     if (res.data.success) {
       updateCurUser(null)
       navigate('/')
@@ -32,12 +34,13 @@ function Navigation() {
               curUser
                 ?
                 <>
+                <span className='my-md-auto mb-2'>Welcome back, {curUser.name}</span>
                   {
-                    curUser.plan === ''
+                    curUser.plan
                       ?
-                      <Link to='/join'><Button className='ms-3'>Join Us</Button></Link>
-                      :
                       null
+                      :
+                      <Link to='/join'><Button className='ms-3'>Join Us</Button></Link>
                   }
                   <Link><Button className='ms-3' onClick={logout}>Log Out</Button></Link>
                 </>
@@ -54,4 +57,4 @@ function Navigation() {
   );
 }
 
-export default Navigation;
+export default Navigation

@@ -1,15 +1,18 @@
 const express = require('express')
 
-const { registerUser, loginUser, logoutUser, getUserInfo, updateUserInfo } = require('../controllers/userController')
-const {authProtect} = require('../middlewares/authProtect')
+const { registerUser, loginUser, loginGoogle, logoutUser, getUserInfo, updateUserInfo } = require('../controllers/userController')
+const { authProtect, googleAuthProtect } = require('../middlewares/authProtect')
 
 const router = express.Router()
 
 router.route('/register')
   .post(registerUser)
 
-router.route('/login')
+router.route('/auth')
   .post(loginUser)
+
+router.route('/auth/google')
+  .post(googleAuthProtect, loginGoogle)
 
 router.route('/logout')
   .post(logoutUser)

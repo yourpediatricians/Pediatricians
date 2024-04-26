@@ -18,10 +18,6 @@ function Signup() {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [showWarning, setShowWarning] = useState(false)
 
-  const checkPasswordSame = () => {
-    return formData.password === confirmPassword ? true : false
-  }
-
   const handlePasswordChange = (e) => {
     setConfirmPassword(e.target.value)
   }
@@ -37,7 +33,7 @@ function Signup() {
       e.stopPropagation()
     } else {
       if (formData.password === confirmPassword) {
-        const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/users/register`, formData)
+        const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/users/register`, formData, { withCredentials: true })
         updateCurUser(res.data.userInfo)
         navigate('/')
       } else {
@@ -84,7 +80,7 @@ function Signup() {
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPassword2">
                   <Form.Label className='mb-0'>Confirm Password:</Form.Label>
-                  <Form.Control type="password" className='rounded-pill px-4' value={confirmPassword} onChange={handlePasswordChange} required/>
+                  <Form.Control type="password" className='rounded-pill px-4' value={confirmPassword} onChange={handlePasswordChange} required />
                 </Form.Group>
                 {
                   showWarning

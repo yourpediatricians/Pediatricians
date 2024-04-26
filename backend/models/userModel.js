@@ -2,42 +2,33 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 
 const userSchema = mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
+  accountInfo: {
+    accountType: String,
+    email: String,
+    password: String,
+    googleId: String
   },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  phone: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  address: {
-    type: String
-  },
-  plan: {
-    type: String
+  userInfo: {
+    name: String,
+    phone: String,
+    address: String,
+    plan: String
   }
 }, { timestamps: true, })
 
 userSchema.methods.matchPassword = async function (enteredPassword) {
-  return await bcrypt.compare(enteredPassword, this.password)
+  return await bcrypt.compare(enteredPassword, this.accountInfo.password)
 }
 
 userSchema.pre('save', async function (next) {
-  if (!this.isModified('password')) {
+  if (!this.isModified('accountInfo.password')) {
     next()
   }
-  const salt = await bcrypt.genSalt(10)
-  this.password = await bcrypt.hash(this.password, salt)
+  if (this.accountInfo.accountType === 'local') {
+    const salt = await bcrypt.genSalt(10)
+    this.accountInfo.password = await bcrypt.hash(this.accountInfo.password, salt)
+  }
+  next()
 })
 
 module.exports = mongoose.model('User', userSchema)

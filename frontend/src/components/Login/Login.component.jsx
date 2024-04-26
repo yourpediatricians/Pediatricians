@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { GoogleLogin } from '@react-oauth/google'
 import { useAuth } from '../../contexts/AuthContext'
 import { Form, Button } from 'react-bootstrap'
 
@@ -21,13 +22,24 @@ function Login() {
   const login = async (e) => {
     e.preventDefault()
     try {
-      const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/users/login`, formData, { withCredentials: true })
+      const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/users/auth`, formData, { withCredentials: true })
       updateCurUser(res.data.userInfo)
       navigate('/')
     }
     catch {
       setShowError(true)
     }
+  }
+
+  const responseMessage = async (response) => {
+    const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/users/auth/google`, response, { withCredentials: true })
+    if (res.data.success) {
+      updateCurUser(res.data.userInfo)
+      navigate('/')
+    }
+  }
+  const errorMessage = (error) => {
+    console.log(error)
   }
 
   return (
@@ -60,6 +72,7 @@ function Login() {
                 {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Check me out" />
           </Form.Group> */}
+                <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
                 <Button variant="primary" type="submit" className='rounded-pill w-100 mt-3'>
                   Login
                 </Button>
