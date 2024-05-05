@@ -1,20 +1,26 @@
 import axios from 'axios'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useAuth } from '../../contexts/AuthContext'
 import { Button, Container, Nav, Navbar } from 'react-bootstrap'
 
+import { useAuth } from '../../contexts/AuthContext'
+import { useLoading } from '../../contexts/LoadingContext'
+
 import profile_icon from '../../assets/svgs/person-circle.svg'
+import logo from '/logo.png'
 
 function Navigation() {
   const navigate = useNavigate()
   const { curUser, updateCurUser } = useAuth()
+  const { setLoading } = useLoading()
   const [expanded, setExpanded] = useState(false)
 
   const logout = async () => {
+    setLoading(true)
     const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/users/logout`, null, { withCredentials: true })
     if (res.data.success) {
       updateCurUser(null)
+      setLoading(false)
       navigate('/')
     }
   }
@@ -22,7 +28,16 @@ function Navigation() {
   return (
     <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary" expanded={expanded}>
       <Container>
-        <Navbar.Brand as={Link} to="/">Wepediatrics</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">
+          <img
+            alt=""
+            src={logo}
+            width="37"
+            height="30"
+            className="d-inline-block align-top"
+          />{' '}
+          Wepediatrics
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setExpanded(!expanded)} />
         <Navbar.Collapse id="basic-navbar-nav" onClick={() => setExpanded(false)}>
           <Nav className="me-auto">
@@ -34,13 +49,13 @@ function Navigation() {
               curUser
                 ?
                 <>
-                <span className='my-md-auto mb-2'>Welcome back, {curUser.name}</span>
+                  <span className='my-md-auto mb-2'>Welcome back, {curUser.name}</span>
                   {
                     curUser.plan
                       ?
                       null
                       :
-                      <Link to='/join'><Button className='ms-3'>Join Us</Button></Link>
+                      <Link to='/join'><Button className='ms-3 mb-2 mb-lg-0'>Join Us</Button></Link>
                   }
                   <Link><Button className='ms-3' onClick={logout}>Log Out</Button></Link>
                 </>

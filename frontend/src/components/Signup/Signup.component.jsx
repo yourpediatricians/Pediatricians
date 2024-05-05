@@ -1,13 +1,17 @@
 import axios from 'axios'
 import { useState } from "react"
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../../contexts/AuthContext'
 import { Form, Button } from 'react-bootstrap'
+
+import { useAuth } from '../../contexts/AuthContext'
+import { useLoading } from '../../contexts/LoadingContext'
 
 function Signup() {
   const navigate = useNavigate()
   const { curUser, updateCurUser } = useAuth()
+  const { setLoading } = useLoading()
   const [validated, setValidated] = useState(false)
+  const [disabled, setDisabled] = useState(false)
 
   const [formData, setFormData] = useState({
     name: '',
@@ -27,6 +31,8 @@ function Signup() {
   }
 
   const handleSubmit = async (e) => {
+    setLoading(true)
+    setDisabled(true)
     e.preventDefault()
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
@@ -41,6 +47,8 @@ function Signup() {
       }
     }
     setValidated(true)
+    setLoading(false)
+    setDisabled(false)
   }
 
   return (
@@ -91,7 +99,7 @@ function Signup() {
                     : null
                 }
 
-                <Button variant="primary" type="submit" className='rounded-pill w-100 mt-3'>
+                <Button variant="primary" type="submit" className='rounded-pill w-100 mt-3' disabled={disabled}>
                   Confirm
                 </Button>
               </Form>

@@ -21,12 +21,12 @@ function Benefits() {
     },
     {
       heading: 'False promises',
-      info: 'If you don’t like Wepediatrics we’ll refund your membership. We have a 100% satisfaction guarantee policy.'
+      info: 'If you don’t like Wepediatrics you can claim a refund within 3 days. We have a 100% satisfaction guarantee policy.'
     }
   ]
 
   return (
-    <section style={{backgroundColor: '#235aff'}} className="text-white">
+    <section style={{ backgroundColor: '#235aff' }} className="text-white">
       <div className="row benefit-lg me-0">
         <div className="col-7 p-5 pb-0 d-flex flex-column justify-content-between">
           <div className="ms-5 ps-5 pt-5">
@@ -35,7 +35,7 @@ function Benefits() {
           </div>
           <div className="row">
             <div className="col-xl-8 col-10 offset-2 pb-5">
-              <Image src={kitImage} fluid className='kit-image'/>
+              <Image src={kitImage} fluid className='kit-image' />
             </div>
           </div>
         </div>
@@ -62,7 +62,7 @@ function Benefits() {
           }
         </div>
         <div>
-          <Image src={kitImage} fluid className='kit-image'/>
+          <Image src={kitImage} fluid className='kit-image' />
         </div>
       </div>
     </section>

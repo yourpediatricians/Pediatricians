@@ -1,5 +1,6 @@
 import mainImage from '../../assets/mainImage.jpg'
 
+import { Link } from 'react-router-dom'
 import { Button, Image } from "react-bootstrap"
 import './mainheader.styles.css'
 
@@ -23,7 +24,7 @@ function MainHeader() {
                   <div className="d-flex mb-3">
                     <div className="d-flex flex-column align-items-center">
                       <div>
-                        <Button className="px-5 py-2 rounded-pill fs-6 fw-bold">Get Started</Button>
+                        <Link to='/signup'><Button className="px-5 py-2 rounded-pill fs-6 fw-bold">Get Started</Button></Link>
                       </div>
                       <div style={{ fontSize: '0.8em' }}>
                         Risk Free. Cancel Anytime.

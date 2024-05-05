@@ -2,13 +2,17 @@ import axios from 'axios'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { GoogleLogin } from '@react-oauth/google'
-import { useAuth } from '../../contexts/AuthContext'
 import { Form, Button } from 'react-bootstrap'
+
+import { useAuth } from '../../contexts/AuthContext'
+import { useLoading } from '../../contexts/LoadingContext'
 
 function Login() {
   const navigate = useNavigate()
   const { curUser, updateCurUser } = useAuth()
+  const { setLoading } = useLoading()
 
+  const [disabled, setDisabled] = useState(false)
   const [showError, setShowError] = useState(false)
   const [formData, setFormData] = useState({
     email: '',
@@ -20,6 +24,8 @@ function Login() {
   }
 
   const login = async (e) => {
+    setLoading(true)
+    setDisabled(true)
     e.preventDefault()
     try {
       const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/users/auth`, formData, { withCredentials: true })
@@ -29,14 +35,20 @@ function Login() {
     catch {
       setShowError(true)
     }
+    setLoading(false)
+    setDisabled(false)
   }
 
   const responseMessage = async (response) => {
+    setLoading(true)
+    setDisabled(true)
     const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/users/auth/google`, response, { withCredentials: true })
     if (res.data.success) {
       updateCurUser(res.data.userInfo)
       navigate('/')
     }
+    setLoading(false)
+    setDisabled(false)
   }
   const errorMessage = (error) => {
     console.log(error)
@@ -73,7 +85,7 @@ function Login() {
             <Form.Check type="checkbox" label="Check me out" />
           </Form.Group> */}
                 <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
-                <Button variant="primary" type="submit" className='rounded-pill w-100 mt-3'>
+                <Button variant="primary" type="submit" className='rounded-pill w-100 mt-3' disabled={disabled}>
                   Login
                 </Button>
               </Form>

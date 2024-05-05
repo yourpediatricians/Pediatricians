@@ -13,20 +13,11 @@ function Footer() {
           <div className='col-12 col-sm-8 mb-3 mb-sm-0 d-flex align-items-center justify-content-evenly'>
             <div>
               <div>How It Works</div>
-              <div>How It Works</div>
-              <div>How It Works</div>
-              <div>How It Works</div>
             </div>
             <div>
               <div>FAQs</div>
-              <div>FAQs</div>
-              <div>FAQs</div>
-              <div>FAQs</div>
             </div>
             <div>
-              <div>Contact Us</div>
-              <div>Contact Us</div>
-              <div>Contact Us</div>
               <div>Contact Us</div>
             </div>
           </div>

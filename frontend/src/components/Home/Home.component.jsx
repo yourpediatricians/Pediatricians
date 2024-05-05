@@ -16,7 +16,7 @@ function Home() {
       {/* <SiteAwards /> */}
       <Benefits />
       <TeamInfo />
-      <ParentReviews />
+      {/* <ParentReviews /> */}
       <Working />
       <FeaturesIncluded />
       <PriceSavings />
