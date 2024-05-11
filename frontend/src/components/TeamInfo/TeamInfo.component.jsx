@@ -79,7 +79,7 @@ function TeamInfo() {
     <section>
       <div className="container my-5">
         <h1 className='fw-bold pt-5'>Meet Your Team</h1>
-        <p className="mb-5" style={{fontSize: '1.2em'}}>All Wepediatrics pediatricians are board-certified by the American Board of Pediatrics and have many years of experience providing medical care for kids, from newborn all the way to 21!</p>
+        <p className="mb-5" style={{fontSize: '1.2em'}}>All Wepediatrics pediatricians are board-certified by the Indian medical council and have many years of experience providing medical care for kids, from newborn all the way to 18!</p>
         <div className="slider-container">
           <Slider {...settings}>
             {

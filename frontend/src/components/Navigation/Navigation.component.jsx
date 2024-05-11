@@ -26,7 +26,7 @@ function Navigation() {
   }
 
   return (
-    <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary" expanded={expanded}>
+    <Navbar collapseOnSelect expand="lg" expanded={expanded} style={{backgroundColor: '#eaeaea'}}>
       <Container>
         <Navbar.Brand as={Link} to="/">
           <img
