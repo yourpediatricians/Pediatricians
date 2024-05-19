@@ -1,5 +1,9 @@
 import Slider from "react-slick"
 
+import { Image } from "react-bootstrap"
+
+import docImg from '../../assets/doc-pic.png'
+
 import TeamInfoCard from "../TeamInfoCard/TeamInfoCard.component"
 import './teaminfo.styles.css'
 
@@ -79,8 +83,31 @@ function TeamInfo() {
     <section>
       <div className="container my-5">
         <h1 className='fw-bold pt-5'>Meet Your Team</h1>
-        <p className="mb-5" style={{fontSize: '1.2em'}}>All Wepediatrics pediatricians are board-certified by the Indian medical council and have many years of experience providing medical care for kids, from newborn all the way to 18!</p>
-        <div className="slider-container">
+        <p className="mb-5" style={{ fontSize: '1.2em' }}>All Wepediatrics pediatricians are board-certified by the Indian medical council and have many years of experience providing medical care for kids, from newborn all the way to 16!</p>
+
+        <div className="row align-items-center justify-content-center">
+          <div className="col-12 col-sm-4 mb-3 mb-sm-0">
+            <div className="d-flex w-100 h-100 align-items-center justify-content-center">
+              <div className="row">
+                <div className="col-10 offset-1">
+                  <Image src={docImg} roundedCircle fluid/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-12 col-sm-8">
+            <h3>Dr. Rahul Sehrawat</h3>
+            <h5>Chief Medical Officer, MBBS</h5>
+            Compassionate doctor with a successful background in
+            diagnosis, treatment and providing comprehensive
+            medical care to children from infancy to adolescence.
+            Acclaimed for making informed decisions to manage a
+            variety of patients ailments. Ensures adherence to
+            healthcare guidelines and standard practice.
+          </div>
+        </div>
+
+        {/* <div className="slider-container">
           <Slider {...settings}>
             {
               teamMembers.map((member, i) => <div key={i}>
@@ -88,7 +115,7 @@ function TeamInfo() {
               </div>)
             }
           </Slider>
-        </div>
+        </div> */}
       </div>
     </section>
   )

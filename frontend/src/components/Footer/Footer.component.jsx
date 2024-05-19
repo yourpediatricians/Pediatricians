@@ -1,4 +1,4 @@
-import { Youtube, Facebook, Linkedin } from 'react-bootstrap-icons'
+import { Youtube, Facebook, Instagram } from 'react-bootstrap-icons'
 
 function Footer() {
   return (
@@ -23,11 +23,17 @@ function Footer() {
           </div>
           <div className='col-12 col-sm-2 mb-3 mb-sm-0'>
             <div className="d-flex flex-column justify-content-center align-items-center">
-              <div>Follow Us On</div>
+              <div className='mb-2'>Follow Us On</div>
               <div className="d-flex justify-content-between align-items-between">
-                <div className='mx-2'><Facebook /></div>
-                <div className='mx-2'><Youtube /></div>
-                <div className='mx-2'><Linkedin /></div>
+                <div className='mx-2'>
+                  <a href="https://www.facebook.com/profile.php?id=61558286968392&mibextid=ZbWKwL" target='_blank'><Facebook size={25} color='white' /></a>
+                </div>
+                <div className='mx-2'>
+                  <a href="https://youtube.com/@wepediatrics?si=7W3xYISb4KbNMU5l" target='_blank'><Youtube size={25} color='white' /></a>
+                </div>
+                <div className='mx-2'>
+                  <a href="https://www.instagram.com/wepediatrics" target='_blank'><Instagram size={25} color='white' /></a>
+                </div>
               </div>
             </div>
           </div>

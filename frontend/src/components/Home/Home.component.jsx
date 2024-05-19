@@ -19,7 +19,7 @@ function Home() {
       {/* <ParentReviews /> */}
       <Working />
       <FeaturesIncluded />
-      <PriceSavings />
+      {/* <PriceSavings /> */}
       <Faqs />
       <Footer />
     </>
