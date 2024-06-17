@@ -2,6 +2,10 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 
 const userSchema = mongoose.Schema({
+  isVerified: {
+    type: Boolean,
+    default: false
+  },
   accountInfo: {
     accountType: String,
     email: String,

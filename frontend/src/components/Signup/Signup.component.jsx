@@ -41,7 +41,7 @@ function Signup() {
       if (formData.password === confirmPassword) {
         const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/users/register`, formData, { withCredentials: true })
         updateCurUser(res.data.userInfo)
-        navigate('/')
+        navigate('/signup/success')
       } else {
         setShowWarning(true)
       }

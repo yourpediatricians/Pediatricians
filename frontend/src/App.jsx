@@ -7,6 +7,8 @@ import Layout from './components/Layout/Layout.component'
 import Home from './components/Home/Home.component'
 import Login from './components/Login/Login.component'
 import Signup from './components/Signup/Signup.component'
+import SignupSuccess from './components/SignupSuccess/SignupSuccess.component'
+import VerifyMail from './components/VerifyMail/VerifyMail.component'
 import JoinUs from './components/JoinUs/JoinUs.component'
 
 import './App.css'
@@ -31,6 +33,8 @@ function App() {
           <Route path='login' element={<Login />} />
           <Route path='join' element={<JoinUs />} />
           <Route path='signup' element={<Signup />} />
+          <Route path='signup/success' element={<SignupSuccess />} />
+          <Route path='verify' element={<VerifyMail />} />
         </Route>
       </Routes>
     </>

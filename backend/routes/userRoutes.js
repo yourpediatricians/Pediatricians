@@ -1,12 +1,15 @@
 const express = require('express')
 
-const { registerUser, loginUser, loginGoogle, logoutUser, getUserInfo, updateUserInfo } = require('../controllers/userController')
+const { registerUser, loginUser, loginGoogle, logoutUser, getUserInfo, updateUserInfo, verifyUser } = require('../controllers/userController')
 const { authProtect, googleAuthProtect } = require('../middlewares/authProtect')
 
 const router = express.Router()
 
 router.route('/register')
   .post(registerUser)
+
+router.route('/verify')
+  .get(verifyUser)
 
 router.route('/auth')
   .post(loginUser)
