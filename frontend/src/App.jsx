@@ -10,6 +10,7 @@ import Signup from './components/Signup/Signup.component'
 import SignupSuccess from './components/SignupSuccess/SignupSuccess.component'
 import VerifyMail from './components/VerifyMail/VerifyMail.component'
 import JoinUs from './components/JoinUs/JoinUs.component'
+import Prescription from './components/Prescription/Prescription.component'
 
 import './App.css'
 
@@ -35,6 +36,7 @@ function App() {
           <Route path='signup' element={<Signup />} />
           <Route path='signup/success' element={<SignupSuccess />} />
           <Route path='verify' element={<VerifyMail />} />
+          <Route path='prescription' element={<Prescription />} /> 
         </Route>
       </Routes>
     </>
