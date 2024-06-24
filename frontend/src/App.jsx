@@ -10,9 +10,13 @@ import Signup from './components/Signup/Signup.component'
 import SignupSuccess from './components/SignupSuccess/SignupSuccess.component'
 import VerifyMail from './components/VerifyMail/VerifyMail.component'
 import JoinUs from './components/JoinUs/JoinUs.component'
+
 import Prescription from './components/Prescription/Prescription.component'
 
 import './App.css'
+import RefundPolicy from './components/Footer/RefundPolicy'
+import PrivacyPolicy from './components/Footer/PrivacyPolicy'
+import TermsOfUse from './components/Footer/TermsOfUse'
 
 function App() {
   const { curUser, updateCurUser } = useAuth()
@@ -36,6 +40,10 @@ function App() {
           <Route path='signup' element={<Signup />} />
           <Route path='signup/success' element={<SignupSuccess />} />
           <Route path='verify' element={<VerifyMail />} />
+          <Route path='refund-policy' element={<RefundPolicy />} />
+          <Route path='privacy-policy' element={<PrivacyPolicy />} />
+          <Route path='termsofuse' element={<TermsOfUse />} />
+
           <Route path='prescription' element={<Prescription />} /> 
         </Route>
       </Routes>

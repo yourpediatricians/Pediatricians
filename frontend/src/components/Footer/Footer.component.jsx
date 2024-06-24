@@ -1,4 +1,5 @@
 import { Youtube, Facebook, Instagram } from 'react-bootstrap-icons'
+import { Link } from 'react-router-dom'
 
 function Footer() {
   return (
@@ -41,9 +42,15 @@ function Footer() {
         <div className="d-flex flex-column justify-content-center align-items-center" style={{ fontSize: '0.85em' }}>
           <div className='mb-3'>© 2024 Active Wave Pvt. Ltd.</div>
           <div className='d-flex flex-wrap justify-content-center align-items-center gap-3'>
-            <div>Refund Policy</div>
-            <div>Privacy Policy</div>
-            <div>Terms of Use</div>
+          <div>
+      <Link to="/refund-policy" style={{ color: 'white' }}>Refund Policy</Link>
+    </div>
+    <div>
+      <Link to="/privacy-policy" style={{ color: 'white' }}>Privacy Policy</Link>
+    </div>
+    <div>
+      <Link to="/termsofuse" style={{ color: 'white' }}>Terms Of Use</Link>
+    </div>
           </div>
         </div>
       </div>
