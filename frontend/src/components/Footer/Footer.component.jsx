@@ -49,6 +49,9 @@ function Footer() {
       <Link to="/privacy-policy" style={{ color: 'white' }}>Privacy Policy</Link>
     </div>
     <div>
+      <Link to="/shipping-policy" style={{ color: 'white' }}>Shipping Policy</Link>
+    </div>
+    <div>
       <Link to="/termsofuse" style={{ color: 'white' }}>Terms Of Use</Link>
     </div>
           </div>
