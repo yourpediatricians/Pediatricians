@@ -16,9 +16,9 @@ module.exports.registerUser = async (req, res) => {
         success: false,
         message: 'User already exists'
       })
-      else {
-        await User.deleteOne({_id: user._id})
-      }
+    else {
+      await User.deleteOne({ _id: user._id })
+    }
     // throw new Error('User already exists')
   }
 
@@ -55,25 +55,33 @@ module.exports.registerUser = async (req, res) => {
 module.exports.verifyUser = async (req, res) => {
   const token = req.query.token
   // console.log(token)
-  jwt.verify(token, process.env.JWT_SECRET,async function(err, decoded) {
+  jwt.verify(token, process.env.JWT_SECRET, async function (err, decoded) {
     if (err) {
-        // console.log(err)
+      // console.log(err)
+      return res.json({
+        success: false,
+        message: 'Token Verification failed'
+      })
+    }
+    else {
+      // console.log('hi')
+      const user = await User.findOne({ _id: decoded.data._id })
+      if (user) {
+        user.isVerified = true
+        await user.save()
+        return res.status(200).json({
+          success: true,
+          message: 'Token Verified Successfully'
+        })
+      }
+      else {
         return res.json({
           success: false,
           message: 'Token Verification failed'
         })
+      }
     }
-    else {
-      // console.log('hi')
-      const user = await User.findOne({_id: decoded.data._id})
-      user.isVerified = true
-      await user.save()
-      return res.status(200).json({
-        success: true,
-        message: 'Token Verified Successfully'
-      })
-    }
-});
+  });
 }
 
 module.exports.loginGoogle = async (req, res) => {
