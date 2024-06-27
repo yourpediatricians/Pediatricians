@@ -10,7 +10,7 @@ module.exports.sendVerificationToken = (userInfo) => {
             ciphers: 'SSLv3'
         },
         requireTLS: true,
-        port: 465,
+        port: 587,
         debug: true,
         auth: {
             user: process.env.GODADDY_USER,
