@@ -11,7 +11,7 @@ module.exports.sendVerificationToken = (userInfo) => {
         // },
         // requireTLS: true,
         port: 465,
-        // debug: true,
+        debug: true,
         auth: {
             user: process.env.GODADDY_USER,
             pass: process.env.GODADDY_PASS
