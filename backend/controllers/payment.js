@@ -32,6 +32,7 @@ function generateXVerify(apiEndpoint, encodedRequest) {
 }
 
 exports.abcd = async (req, res) => {
+  const { name, by_amount } = req.body;
   console.log(req.body);
 
   try {
@@ -40,9 +41,9 @@ exports.abcd = async (req, res) => {
     const data = {
       merchantId: "WEPEDIATRICSONLINE",
       merchantTransactionId: generatedTranscId(),
-      merchantUserId: "MUID" + "iasuhfdjksfh",
-      name: "Kasjh",
-      amount: price * 100,
+      merchantUserId: "MUID" + generatedTranscId(),
+      name: name,
+      amount: by_amount * 100,
       redirectUrl: `https://back.wepediatrics.com/payment/status/${generatedTranscId()}`,
       redirectMode: "POST",
       mobileNumber: 9958486923,
@@ -78,13 +79,18 @@ exports.abcd = async (req, res) => {
       .request(requestData)
       .then(async function (response) {
         const phonePeTransactionId = response.data.merchantTransactionId;
-        res.status(201).send({
-          msg: "payment done",
-          status: "success",
-          data: response.data,
-          phonePeTransactionId: phonePeTransactionId,
-        });
-        console.log("Payment API Response:", response.data);
+        // res.status(201).send({
+        //   msg: "payment done",
+        //   status: "success",
+        //   data: response.data,
+        //   phonePeTransactionId: phonePeTransactionId,
+        // });
+        res.redirect(response.data.data.instrumentResponse.redirectInfo.url);
+
+        console.log(
+          "Payment API Response:",
+          response.data.data.instrumentResponse.redirectInfo.url
+        );
       })
       .catch(function (error) {
         console.error("Payment API Error:", error.message);
