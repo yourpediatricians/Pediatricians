@@ -43,7 +43,7 @@ exports.abcd = async (req, res) => {
       merchantUserId: "MUID" + "iasuhfdjksfh",
       name: "Kasjh",
       amount: price * 100,
-      redirectUrl: `http://localhost:3000/payment/status/${generatedTranscId()}`,
+      redirectUrl: `https://back.wepediatrics.com/payment/status/${generatedTranscId()}`,
       redirectMode: "POST",
       mobileNumber: 9958486923,
       paymentInstrument: {
