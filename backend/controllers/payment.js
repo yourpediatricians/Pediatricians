@@ -60,7 +60,7 @@ exports.abcd = async (req, res) => {
     const sha256 = CryptoJS.SHA256(string).toString();
     const checksum = sha256 + "###" + keyIndex;
 
-    const prod_URL = "https://www.wepediatrics.com/apis/hermes/pg/v1/pay";
+    const prod_URL = "https://api.phonepe.com/apis/hermes/pg/v1/pay";
     const requestData = {
       method: "POST",
       url: prod_URL,
