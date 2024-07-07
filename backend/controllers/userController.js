@@ -36,7 +36,7 @@ module.exports.registerUser = async (req, res) => {
 
   if (newUser) {
     // generateToken(res, newUser._id)
-    sendVerificationToken(newUser)
+    await sendVerificationToken(newUser)
     res.status(201).json({
       success: true,
       // userInfo: {

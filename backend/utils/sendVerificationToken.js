@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer')
 const jwt = require('jsonwebtoken')
 
-module.exports.sendVerificationToken = (userInfo) => {
+module.exports.sendVerificationToken = async (userInfo) => {
     const transporter = nodemailer.createTransport({
         host: "smtpout.secureserver.net",
         secure: true,
@@ -44,12 +44,18 @@ module.exports.sendVerificationToken = (userInfo) => {
                Thanks`
     };
 
-    transporter.sendMail(mailConfigurations, function (error, info) {
-        if (error) {
-            console.log(error)
-        }
-        // console.log('Email Sent Successfully');
-        // console.log(info);
+    await new Promise((resolve, reject) => {
+        // send mail
+        transporter.sendMail(mailConfigurations, (err, info) => {
+            if (err) {
+                console.error(err);
+                reject(err);
+            } else {
+                console.log(info);
+                resolve(info);
+            }
+        });
     });
 
+    res.status(200).json({ status: "OK" });
 }
