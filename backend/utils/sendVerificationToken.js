@@ -47,13 +47,9 @@ module.exports.sendVerificationToken = (userInfo) => {
     transporter.sendMail(mailConfigurations, function (error, info) {
         if (error) {
             console.log(error)
-            return res.json({
-                success: false,
-                message: 'Token Verification failed'
-              })
         }
-        console.log('Email Sent Successfully');
-        console.log(info);
+        // console.log('Email Sent Successfully');
+        // console.log(info);
     });
 
 }
