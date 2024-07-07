@@ -44,16 +44,6 @@ module.exports.sendVerificationToken = async (userInfo) => {
                Thanks`
     };
 
-    await new Promise((resolve, reject) => {
-        // send mail
-        transporter.sendMail(mailConfigurations, (err, info) => {
-            if (err) {
-                console.error(err);
-                reject(err);
-            } else {
-                console.log(info);
-                resolve(info);
-            }
-        });
-    });
+    const info = await transporter.sendMail(mailConfigurations)
+    console.log(info)
 }
