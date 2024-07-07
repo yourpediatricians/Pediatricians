@@ -56,6 +56,4 @@ module.exports.sendVerificationToken = async (userInfo) => {
             }
         });
     });
-
-    res.status(200).json({ status: "OK" });
 }
