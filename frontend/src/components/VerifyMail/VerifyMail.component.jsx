@@ -12,7 +12,7 @@ const VerifyMail = () => {
     setLoading(true)
     async function verifyAccount() {
       const token = searchParams.get('token')
-      const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/users/verify?token=${token}`, { withCredentials: true })
+      const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/users/verify`, {token: token}, { withCredentials: true })
       if (res.data.success) {
         setIsVerified(true)
       }

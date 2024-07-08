@@ -9,7 +9,7 @@ router.route('/register')
   .post(registerUser)
 
 router.route('/verify')
-  .get(verifyUser)
+  .post(verifyUser)
 
 router.route('/auth')
   .post(loginUser)

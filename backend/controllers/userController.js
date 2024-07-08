@@ -53,7 +53,7 @@ module.exports.registerUser = async (req, res) => {
 }
 
 module.exports.verifyUser = async (req, res) => {
-  const token = req.query.token
+  const { token } = req.body
   console.log(token)
   jwt.verify(token, process.env.JWT_SECRET, async function (err, decoded) {
     if (err) {
