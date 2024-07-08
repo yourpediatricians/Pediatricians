@@ -46,4 +46,12 @@ module.exports.sendVerificationToken = async (userInfo) => {
 
     const info = await transporter.sendMail(mailConfigurations)
     console.log(info)
+
+    // transporter.sendMail(mailConfigurations).then((info) => {
+    //     console.log('Email sent successfully');
+    //     console.log(info)
+    // }).catch((err) => {
+    //     console.log('Failed to send email');
+    //     console.error(err);
+    // });
 }
