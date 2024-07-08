@@ -29,7 +29,7 @@ module.exports.sendVerificationToken = async (userInfo) => {
     const mailConfigurations = {
 
         // It should be a string of sender/server email
-        from: process.env.GODADDY_USER,
+        from: `"Wepediatrics" ${process.env.GODADDY_USER}`,
 
         to: userInfo.accountInfo.email,
 
@@ -37,15 +37,18 @@ module.exports.sendVerificationToken = async (userInfo) => {
         subject: 'Email Verification for Wepediatrics account.',
 
         // This would be the text of email body
-        text: `Hi! There, You have recently visited 
-               our website and entered your email.
-               Please follow the given link to verify your email
-               ${process.env.FRONTEND_LINK}/verify?token=${token}
-               Thanks`
+        // text: `Hi! There, You have recently visited our website and entered your email.
+        //        Please follow the given link to verify your email
+        //        ${process.env.FRONTEND_LINK}/verify?token=${token}
+        //        Thanks`,
+        
+        html: `<p>Hi! There, You have recently visited our website and registered with your email.</p>
+               <p>Click <a href="${process.env.FRONTEND_LINK}/verify?token=${token}">here</a> to verify your account.</p>
+               <p>Ignore if not registered by you.</p>`
     };
 
     const info = await transporter.sendMail(mailConfigurations)
-    console.log(info)
+    // console.log(info)
 
     // transporter.sendMail(mailConfigurations).then((info) => {
     //     console.log('Email sent successfully');

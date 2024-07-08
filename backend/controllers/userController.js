@@ -54,10 +54,10 @@ module.exports.registerUser = async (req, res) => {
 
 module.exports.verifyUser = async (req, res) => {
   const token = req.query.token
-  // console.log(token)
+  console.log(token)
   jwt.verify(token, process.env.JWT_SECRET, async function (err, decoded) {
     if (err) {
-      // console.log(err)
+      console.log(err)
       return res.json({
         success: false,
         message: 'Token Verification failed'
