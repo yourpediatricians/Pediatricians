@@ -18,6 +18,8 @@ import RefundPolicy from './components/Footer/RefundPolicy'
 import PrivacyPolicy from './components/Footer/PrivacyPolicy'
 import TermsOfUse from './components/Footer/TermsOfUse'
 import ShippingPolicy from './components/Footer/ShippingPolicy'
+import TelehealthPolicy from './components/Footer/TelehealthPolicy'
+
 
 function App() {
   const { curUser, updateCurUser } = useAuth()
@@ -45,6 +47,7 @@ function App() {
           <Route path='privacy-policy' element={<PrivacyPolicy />} />
           <Route path='termsofuse' element={<TermsOfUse />} />
           <Route path='shipping-policy' element={<ShippingPolicy/>}/>
+          <Route path='telehealth-policy' element={<TelehealthPolicy/>}/>
           
         </Route>
       </Routes>
