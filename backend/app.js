@@ -6,7 +6,10 @@ const cookieParser = require("cookie-parser");
 const connectDB = require("./config/database");
 
 const userRoutes = require("./routes/userRoutes");
-const paymentRoutes = require("./routes/payment");
+const planRoutes = require("./routes/planRoutes");
+const paymentRoutes = require("./routes/paymentRoutes");
+
+const { initUser } = require('./middlewares/authProtect')
 
 const app = express();
 dotenv.config();
@@ -24,13 +27,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors(corsOptions));
+app.use(initUser)
 
 app.use("/users", userRoutes);
-
+app.use("/plans", planRoutes);
 app.use("/payment", paymentRoutes);
 
 app.use("/", (req, res) => {
-  return res.json({ messsage: "incorre" });
+  return res.json({ messsage: "Invalid request" });
 });
 
 const port = process.env.PORT || 3000;

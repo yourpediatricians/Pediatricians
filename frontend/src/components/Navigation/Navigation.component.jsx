@@ -26,7 +26,7 @@ function Navigation() {
   }
 
   return (
-    <Navbar collapseOnSelect expand="lg" expanded={expanded} style={{backgroundColor: '#eaeaea'}}>
+    <Navbar collapseOnSelect expand="lg" expanded={expanded} style={{ backgroundColor: '#eaeaea' }}>
       <Container>
         <Navbar.Brand as={Link} to="/">
           <img
@@ -51,12 +51,13 @@ function Navigation() {
                 <>
                   <span className='my-md-auto mb-2'>Welcome back, {curUser.name}</span>
                   {
-                    curUser.plan
+                    curUser.plan === 'NA'
                       ?
-                      null
-                      :
                       <Link to='/join'><Button className='ms-3 mb-2 mb-lg-0'>Join Us</Button></Link>
+                      :
+                      null
                   }
+                  <Link to='/profile'><Button className='ms-3 mb-2 mb-lg-0'>Profile</Button></Link>
                   <Link><Button className='ms-3' onClick={logout}>Log Out</Button></Link>
                 </>
                 :

@@ -1,7 +1,7 @@
 const express = require('express')
 
 const { registerUser, loginUser, loginGoogle, logoutUser, getUserInfo, updateUserInfo, verifyUser } = require('../controllers/userController')
-const { authProtect, googleAuthProtect } = require('../middlewares/authProtect')
+const { initUser, googleAuthProtect } = require('../middlewares/authProtect')
 
 const router = express.Router()
 
@@ -21,7 +21,7 @@ router.route('/logout')
   .post(logoutUser)
 
 router.route('/info')
-  .get(authProtect, getUserInfo)
-  .put(authProtect, updateUserInfo)
+  .get(getUserInfo)
+  .put(updateUserInfo)
 
 module.exports = router

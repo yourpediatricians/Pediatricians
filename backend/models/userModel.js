@@ -16,8 +16,14 @@ const userSchema = mongoose.Schema({
     name: String,
     phone: String,
     address: String,
-    plan: String
-  }
+    plan: {
+      type: String,
+      default: 'NA'
+    }
+  },
+  txns: [
+    mongoose.ObjectId
+  ]
 }, { timestamps: true, })
 
 userSchema.methods.matchPassword = async function (enteredPassword) {

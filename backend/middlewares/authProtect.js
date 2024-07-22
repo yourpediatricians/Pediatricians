@@ -4,30 +4,30 @@ const User = require('../models/userModel')
 
 const client = new OAuth2Client()
 
-module.exports.authProtect = async (req, res, next) => {
+module.exports.initUser = async (req, res, next) => {
   const token = req.cookies.jwt
   if (token) {
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET)
-      req.user = await User.findById(decoded.userId).select('-password')
-      next()
+      req.user = await User.findById(decoded.userId).select('-accountInfo.password')
     }
     catch (err) {
       console.error(err)
-      return res.json({
-        success: false,
-        msg: 'Invalid token'
-      })
+      // return res.json({
+      //   success: false,
+      //   msg: 'Invalid token'
+      // })
       // throw new Error('Unauthorized')
     }
   }
   else {
-    return res.json({
-      success: false,
-      msg: 'No token'
-    })
+    // return res.json({
+    //   success: false,
+    //   msg: 'No token'
+    // })
     // throw new Error('Unauthorized, no token')
   }
+  next()
 }
 
 module.exports.googleAuthProtect = async (req, res, next) => {

@@ -46,7 +46,7 @@ exports.abcd = async (req, res) => {
       amount: by_amount * 100,
       redirectUrl: `https://back.wepediatrics.com/payment/status/${generatedTranscId()}`,
       redirectMode: "POST",
-      mobileNumber: 9958486923,
+      mobileNumber: 8506094762,
       paymentInstrument: {
         type: "PAY_PAGE",
       },
@@ -82,7 +82,7 @@ exports.abcd = async (req, res) => {
         // res.status(201).send({
         //   msg: "payment done",
         //   status: "success",
-        //   data: response.data,
+        //   data: response.data,          
         //   phonePeTransactionId: phonePeTransactionId,
         // });
         res.redirect(response.data.data.instrumentResponse.redirectInfo.url);

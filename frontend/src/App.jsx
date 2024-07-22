@@ -10,8 +10,10 @@ import Signup from './components/Signup/Signup.component'
 import SignupSuccess from './components/SignupSuccess/SignupSuccess.component'
 import VerifyMail from './components/VerifyMail/VerifyMail.component'
 import JoinUs from './components/JoinUs/JoinUs.component'
-
-
+import Payment from './components/Payment/Payment.component'
+import PaymentStatus from './components/PaymentStatus/PaymentStatus.component'
+import Profile from './components/Profile/Profile.component'
+import Transactions from './components/Transactions/Transactions.component'
 
 import './App.css'
 import RefundPolicy from './components/Footer/RefundPolicy'
@@ -40,12 +42,15 @@ function App() {
           <Route path='join' element={<JoinUs />} />
           <Route path='signup' element={<Signup />} />
           <Route path='signup/success' element={<SignupSuccess />} />
+          <Route path='profile' element={<Profile/>} />
           <Route path='verify' element={<VerifyMail />} />
           <Route path='refund-policy' element={<RefundPolicy />} />
           <Route path='privacy-policy' element={<PrivacyPolicy />} />
           <Route path='termsofuse' element={<TermsOfUse />} />
           <Route path='shipping-policy' element={<ShippingPolicy/>}/>
-          
+          <Route path='payment' element={<Payment/>}/>
+          <Route path='payment/status/:txnId' element={<PaymentStatus/>}/>
+          <Route path='transactions/all' element={<Transactions/>}/>
         </Route>
       </Routes>
     </>

@@ -2,9 +2,12 @@ import mainImage from '../../assets/mainImage.jpg'
 
 import { Link } from 'react-router-dom'
 import { Button, Image } from "react-bootstrap"
+import { useAuth } from '../../contexts/AuthContext'
 import './mainheader.styles.css'
 
 function MainHeader() {
+  const { curUser } = useAuth()
+
   return (
     <>
       <main style={{ backgroundColor: '#f4f2f0' }} className="main-header">
@@ -24,7 +27,14 @@ function MainHeader() {
                   <div className="d-flex mb-3">
                     <div className="d-flex flex-column align-items-center">
                       <div>
-                        <Link to='/signup'><Button className="px-5 py-2 rounded-pill fs-6 fw-bold">Get Started</Button></Link>
+                        {
+                          curUser
+                            ?
+                            <Link to='/payment'><Button className="px-5 py-2 rounded-pill fs-6 fw-bold">Join Us</Button></Link>
+                            :
+                            <Link to='/signup'><Button className="px-5 py-2 rounded-pill fs-6 fw-bold">Get Started</Button></Link>
+                        }
+
                       </div>
                       <div style={{ fontSize: '0.8em' }}>
                         Risk Free. Cancel Anytime.
@@ -67,7 +77,7 @@ function MainHeader() {
           <div>
             <Button className='px-5 py-2 rounded-pill'>Get Started</Button>
           </div>
-          <div style={{ fontSize: '0.8em' }} className='text-white'> 
+          <div style={{ fontSize: '0.8em' }} className='text-white'>
             Risk Free. Cancel Anytime
           </div>
           {/* <div className='mt-3'>

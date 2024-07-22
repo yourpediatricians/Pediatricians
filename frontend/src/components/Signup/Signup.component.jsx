@@ -20,7 +20,10 @@ function Signup() {
     password: '',
   })
   const [confirmPassword, setConfirmPassword] = useState('')
-  const [showWarning, setShowWarning] = useState(false)
+  const [warning, setWarning] = useState({
+    show: false,
+    msg: ''
+  })
 
   const handlePasswordChange = (e) => {
     setConfirmPassword(e.target.value)
@@ -40,10 +43,20 @@ function Signup() {
     } else {
       if (formData.password === confirmPassword) {
         const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/users/register`, formData, { withCredentials: true })
-        updateCurUser(res.data.userInfo)
-        navigate('/signup/success')
+        if (res.data.success) {
+          updateCurUser(res.data.userInfo)
+          navigate('/signup/success')
+        } else {
+          setWarning({
+            show: true,
+            msg: "User already exists"
+          })
+        }
       } else {
-        setShowWarning(true)
+        setWarning({
+          show: true,
+          msg: "Password must be same"
+        })
       }
     }
     setValidated(true)
@@ -91,10 +104,10 @@ function Signup() {
                   <Form.Control type="password" className='rounded-pill px-4' value={confirmPassword} onChange={handlePasswordChange} required />
                 </Form.Group>
                 {
-                  showWarning
+                  warning.show
                     ?
                     <Form.Text className="text-danger ms-3">
-                      Password must be same
+                      {warning.msg}
                     </Form.Text>
                     : null
                 }

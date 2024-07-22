@@ -3,7 +3,7 @@ import kitImage from '../../assets/kitImage.png'
 import axios from 'axios'
 import { useAuth } from '../../contexts/AuthContext'
 import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button, Form, Image } from "react-bootstrap"
 
 import './joinus.styles.css'
@@ -11,15 +11,31 @@ import './joinus.styles.css'
 function SignupFormStep3() {
   const navigate = useNavigate()
   const { curUser, updateCurUser } = useAuth()
-  const [selectedPlan, setSelectedPlan] = useState('plan-monthly')
+  const [plans, setPlans] = useState([])
+  const [selectedPlan, setSelectedPlan] = useState('')
+
+  useEffect(() => {
+    async function getPlans() {
+      const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/plans/all-plans`)
+      if (res.data.success)
+        setPlans(res.data.plans)
+    }
+    getPlans()
+  }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const res = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/users/info`, { plan: selectedPlan }, { withCredentials: true })
-    if (res.data.success) {
-      updateCurUser(res.data.userInfo)
-      navigate('/')
-    }
+    const plan = plans.find(plan => plan.planId === selectedPlan)
+    const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/payment/pay`, { plan: plan }, { withCredentials: true })
+    if (res.data.success)
+      window.location.href = res.data.url
+    else
+      console.log(res.data)
+    // const res = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/users/info`, { plan: selectedPlan }, { withCredentials: true })
+    // if (res.data.success) {
+    //   updateCurUser(res.data.userInfo)
+    //   navigate('/')
+    // }
   }
 
   return (
@@ -50,23 +66,17 @@ function SignupFormStep3() {
                   </div>
                 </div>
 
-                <button onClick={(e) => {
-                  e.preventDefault()
-                  setSelectedPlan('plan-yearly')
-                }}
-                  className={`d-block w-100 mb-3 rounded-pill border ${selectedPlan === 'plan-yearly' ? 'selected' : ''}`}>
-                  <div>
-                    Yearly
-                  </div>
-                </button>
-                <button onClick={(e) => {
-                  e.preventDefault()
-                  setSelectedPlan('plan-monthly')
-                }} className={`d-block w-100 mb-3 rounded-pill border ${selectedPlan === 'plan-monthly' ? 'selected' : ''}`}>
-                  <div>
-                    Monthly
-                  </div>
-                </button>
+                {
+                  plans.map(plan => <button key={plan._id} onClick={(e) => {
+                    e.preventDefault()
+                    setSelectedPlan(plan.planId)
+                  }}
+                    className={`d-block w-100 mb-3 rounded-pill border ${selectedPlan === plan.planId ? 'selected' : ''}`}>
+                    <div>
+                      {plan.planInfo} ₹{plan.amount} {plan.validity} days
+                    </div>
+                  </button>)
+                }
 
                 <Button variant="primary" type="submit" className='rounded-pill w-100 mt-3'>
                   Confirm

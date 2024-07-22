@@ -12,7 +12,7 @@ module.exports.registerUser = async (req, res) => {
 
   if (user) {
     if (user.isVerified)
-      return res.status(401).json({
+      return res.json({
         success: false,
         message: 'User already exists'
       })
@@ -170,15 +170,21 @@ module.exports.logoutUser = (req, res) => {
 
 module.exports.getUserInfo = (req, res) => {
   const user = req.user
-  res.json({
-    success: true,
-    userInfo: {
-      _id: user._id,
-      name: user.userInfo.name,
-      email: user.accountInfo.email,
-      plan: user.userInfo.plan
-    }
-  })
+  if(user) {
+    return res.json({
+      success: true,
+      userInfo: {
+        _id: user._id,
+        name: user.userInfo.name,
+        email: user.accountInfo.email,
+        plan: user.userInfo.plan
+      }
+    })
+  } else {
+    return res.json({
+      success: false
+    })
+  }
 }
 
 module.exports.updateUserInfo = async (req, res) => {
