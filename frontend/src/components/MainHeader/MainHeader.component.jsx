@@ -30,9 +30,11 @@ function MainHeader() {
                         {
                           curUser
                             ?
-                            <Link to='/payment'><Button className="px-5 py-2 rounded-pill fs-6 fw-bold">Join Us</Button></Link>
-                            :
-                            <Link to='/signup'><Button className="px-5 py-2 rounded-pill fs-6 fw-bold">Get Started</Button></Link>
+                            curUser.plan === 'NA'
+                              ?
+                              <Link to='/join'><Button className="px-5 py-2 rounded-pill fs-6 fw-bold">Join Us</Button></Link>
+                              : <Button className="btn-success px-5 py-2 rounded-pill fs-6 fw-bold">Subscribed!</Button>
+                            : <Link to='/signup'><Button className="px-5 py-2 rounded-pill fs-6 fw-bold">Get Started</Button></Link>
                         }
 
                       </div>

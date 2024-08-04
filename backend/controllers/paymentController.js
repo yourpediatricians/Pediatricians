@@ -1,6 +1,7 @@
 const crypto = require("crypto")
 const axios = require("axios")
 const CryptoJS = require("crypto-js")
+const cron = require("node-cron")
 
 const User = require('../models/userModel')
 const Txn = require('../models/txnModel')
@@ -72,7 +73,7 @@ module.exports.initPayment = async (req, res) => {
     const res = await axios.request(options)
     response = res.data
   } catch (err) {
-    console.log(err)
+    // console.log(err)
     return res.json({
       success: false,
       code: err.code,
@@ -80,10 +81,50 @@ module.exports.initPayment = async (req, res) => {
     })
   }
 
+  paymentStatusChecker(txnId)
+
   return res.json({
     success: true,
     url: response.data.instrumentResponse.redirectInfo.url
   })
+}
+
+const paymentStatusChecker = async (txnId) => {
+  var isDone = false
+  const cronJob = cron.schedule('30 * * * * *', async () => {
+    try {
+      if (isDone)
+        return
+      const data = await checkStatus(txnId)
+      if (data) {
+        const txn = await Txn.findById(txnId)
+        const user = await User.findById(txn.userId)
+        if (data.code === 'PAYMENT_SUCCESS') {
+          var expDate = new Date()
+          expDate.setDate(expDate.getDate() + 30)
+
+          txn.status = 'success'
+          user.userInfo.subscription.active = true
+          user.userInfo.subscription.plan = 'Monthly'
+          user.userInfo.subscription.expiry = expDate
+
+          await txn.save()
+          await user.save()
+          isDone = true
+        } else if (['PAYMENT_ERROR', 'TRANSACTION_NOT_FOUND', 'PAYMENT_DECLINED', 'TIMED_OUT'].includes(data.code)) {
+          txn.status = 'failed'
+          await txn.save()
+          isDone = true
+        }
+      }
+    } catch (e) {
+      console.log('Error while checking payment status.')
+    }
+  })
+
+  setTimeout(() => {
+    cronJob.stop()
+  }, 900000)
 }
 
 // module.exports.checkStatus = async (req, res) => {
@@ -141,10 +182,7 @@ const checkStatus = async (merchantTransactionId) => {
   const key = process.env.PHONEPE_SALT; // Update with your API key
   const keyIndex = process.env.PHONEPE_SALT_INDEX;
 
-  const txn = await Txn.findById(merchantTransactionId)
-
-  const string =
-    `/pg/v1/status/${merchantUserId}/${merchantTransactionId}` + key;
+  const string = `/pg/v1/status/${merchantUserId}/${merchantTransactionId}` + key;
   const sha256 = CryptoJS.SHA256(string).toString();
   const checksum = sha256 + "###" + keyIndex;
 
@@ -162,38 +200,38 @@ const checkStatus = async (merchantTransactionId) => {
   };
 
   try {
-    const response = await axios.request(options);
-    // console.log(response.data)
-    txn.status = response.data.code
-    await txn.save()
-    return {
-      success: true,
-      data: response.data,
-      createdAt: txn.createdAt
-    }
+    const response = await axios.request(options)
+    return response.data
   } catch (error) {
-    return {
-      success: false,
-    }
+    console.log(error)
+    return null
   }
 }
 
 module.exports.allTransactions = async (req, res) => {
   const { txns } = req.user
 
-  const txnStatus = await Promise.all(txns.map(async (txn) => {
-    const txnInfo = await checkStatus(txn)
-    return {
-      code: txnInfo.data.code,
-      txnId: txnInfo.data.data.transactionId,
-      amount: txnInfo.data.data.amount,
-      state: txnInfo.data.data.state,
-      date: txnInfo.createdAt
-    }
-  }))
+  if (txns.length > 0) {
+    const txnStatus = await Promise.all(txns.map(async (txn) => {
+      const txnInfo = await checkStatus(txn)
+      if (txnInfo) {
+        return {
+          code: txnInfo.code,
+          txnId: txnInfo.data.transactionId,
+          amount: txnInfo.data.amount,
+          state: txnInfo.data.state,
+        }
+      }
+    }))
 
-  return res.json({
-    success: true,
-    txns: txnStatus
-  })
+    return res.json({
+      success: true,
+      txns: txnStatus
+    })
+  }
+  else {
+    return res.json({
+      success: false
+    })
+  }
 }

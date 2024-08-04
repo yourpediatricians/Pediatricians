@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { ListGroup } from 'react-bootstrap'
 import axios from "axios"
 
 const Transactions = () => {
@@ -15,28 +16,22 @@ const Transactions = () => {
 
   return (
     <>
+      <ListGroup>
+        {
+          txns.map((txn, i) => <ListGroup.Item key={i}>
+            <div>Transaction Id: {txn.txnId}</div>
+            <div>Amount: ₹ {txn.amount / 100}</div>
+            {
+              txn.code === 'PAYMENT_SUCCESS'
+                ?
+                <div>Payment Successfull</div>
+                :
+                <div>Payment failed</div>
+            }
+          </ListGroup.Item>)
+        }
+      </ListGroup>
       <div>Transaction History</div>
-      {
-        txns.map((txn, i) => <div key={i}>
-          <div>Transaction Id: {txn.txnId}</div>
-          <div>Amount: {txn.amount / 100}</div>
-          <div>Date: {txn.date.toLocaleString()}</div>
-          {
-            txn.code === 'PAYMENT_SUCCESS'
-              ?
-              <div>Payment Successfull</div>
-              :
-              <div>Payment failed</div>
-          }
-          {/* {
-            code: 'PAYMENT_SUCCESS',
-          txnId: 'T2407230115162970342548',
-          amount: 99900,
-          state: 'COMPLETED',
-          date: 2024-07-22T19:45:15.965Z
-  } */}
-        </div>)
-      }
     </>
 
   )

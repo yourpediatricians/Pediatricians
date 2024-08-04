@@ -16,9 +16,16 @@ const userSchema = mongoose.Schema({
     name: String,
     phone: String,
     address: String,
-    plan: {
-      type: String,
-      default: 'NA'
+    subscription: {
+      active: {
+        type: Boolean,
+        default: false
+      },
+      plan: {
+        type: String,
+        default: 'NA'
+      },
+      expiry: Date
     }
   },
   txns: [

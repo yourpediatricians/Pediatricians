@@ -177,7 +177,7 @@ module.exports.getUserInfo = (req, res) => {
         _id: user._id,
         name: user.userInfo.name,
         email: user.accountInfo.email,
-        plan: user.userInfo.plan
+        plan: user.userInfo.subscription.plan
       }
     })
   } else {

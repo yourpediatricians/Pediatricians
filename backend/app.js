@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+const cron = require("node-cron")
 
 const connectDB = require("./config/database");
 
@@ -12,8 +13,13 @@ const paymentRoutes = require("./routes/paymentRoutes");
 const { initUser } = require('./middlewares/authProtect')
 
 const app = express();
+
 dotenv.config();
 connectDB();
+
+// cron.schedule('* * * * * *', () => {
+//   sendReminderForServiceExpiring();
+// });
 
 var corsOptions = {
   origin: process.env.FRONTEND_LINK,
