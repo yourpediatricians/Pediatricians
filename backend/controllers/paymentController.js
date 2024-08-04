@@ -6,6 +6,7 @@ const cron = require("node-cron")
 const User = require('../models/userModel')
 const Txn = require('../models/txnModel')
 const Plan = require('../models/planModel')
+const { validate } = require("./couponController")
 
 const generateTxnId = async (user, amount) => {
   const newTxn = await Txn.create({
@@ -20,11 +21,15 @@ const verifyPlan = async (plan) => {
 }
 
 module.exports.initPayment = async (req, res) => {
-
   const user = req.user
   const plan = await verifyPlan(req.body.plan)
+  const coupon = await validate(req.body.coupon)
 
   const txnId = (await generateTxnId(user, plan.amount)).toString()
+
+  var amount
+  if (coupon)
+    amount = plan.amount - coupon.discount
 
   user.txns.push(txnId)
   await user.save()
@@ -33,7 +38,7 @@ module.exports.initPayment = async (req, res) => {
     merchantId: process.env.MERCHANT_ID,
     merchantTransactionId: txnId,
     merchantUserId: user._id.toString(),
-    amount: plan.amount * 100,
+    amount: amount * 100,
     redirectUrl: `${process.env.REDIRECT_URL}/all`,
     redirectMode: "REDIRECT",
     callbackUrl: process.env.CALLBACK_URL,
@@ -178,6 +183,8 @@ const paymentStatusChecker = async (txnId) => {
 
 const checkStatus = async (merchantTransactionId) => {
   // console.log("Checking===========");
+  const txn = await Txn.findById(merchantTransactionId)
+
   const merchantUserId = process.env.MERCHANT_ID; // Update with your merchant ID
   const key = process.env.PHONEPE_SALT; // Update with your API key
   const keyIndex = process.env.PHONEPE_SALT_INDEX;
@@ -201,7 +208,7 @@ const checkStatus = async (merchantTransactionId) => {
 
   try {
     const response = await axios.request(options)
-    return response.data
+    return { txnInfo: response.data, date: txn.createdAt }
   } catch (error) {
     console.log(error)
     return null
@@ -213,13 +220,14 @@ module.exports.allTransactions = async (req, res) => {
 
   if (txns.length > 0) {
     const txnStatus = await Promise.all(txns.map(async (txn) => {
-      const txnInfo = await checkStatus(txn)
+      const { txnInfo, date } = await checkStatus(txn)
       if (txnInfo) {
         return {
           code: txnInfo.code,
           txnId: txnInfo.data.transactionId,
           amount: txnInfo.data.amount,
           state: txnInfo.data.state,
+          date: date
         }
       }
     }))

@@ -9,18 +9,22 @@ const Transactions = () => {
     async function getAllTransactions() {
       const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/payment/status/all`, { withCredentials: true })
       if (res.data.success)
-        setTxns(res.data.txns)
+        setTxns(res.data.txns.sort((a, b) => a.date < b.date))
     }
     getAllTransactions()
   }, [])
 
   return (
     <>
+      <div className="w-100 my-3 d-flex justify-content-center">
+        <div>Transaction History</div>
+      </div>
       <ListGroup>
         {
           txns.map((txn, i) => <ListGroup.Item key={i}>
             <div>Transaction Id: {txn.txnId}</div>
             <div>Amount: ₹ {txn.amount / 100}</div>
+            <div>Date: {new Date(txn.date).toLocaleString()}</div>
             {
               txn.code === 'PAYMENT_SUCCESS'
                 ?
@@ -31,7 +35,6 @@ const Transactions = () => {
           </ListGroup.Item>)
         }
       </ListGroup>
-      <div>Transaction History</div>
     </>
 
   )

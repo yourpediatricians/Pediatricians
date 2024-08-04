@@ -12,6 +12,8 @@ function SignupFormStep3() {
   const navigate = useNavigate()
   const { curUser, updateCurUser } = useAuth()
   const [plans, setPlans] = useState([])
+  const [coupon, setCoupon] = useState('')
+  const [couponValid, setCouponValid] = useState(null)
   const [selectedPlan, setSelectedPlan] = useState('')
 
   useEffect(() => {
@@ -23,10 +25,19 @@ function SignupFormStep3() {
     getPlans()
   }, [])
 
+  const checkCoupon = async (e) => {
+    const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/coupons/check`, { coupon: coupon })
+    console.log(res.data)
+    if (res.data.success)
+      setCouponValid(true)
+    else
+      setCouponValid(false)
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     const plan = plans.find(plan => plan.planId === selectedPlan)
-    const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/payment/pay`, { plan: plan }, { withCredentials: true })
+    const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/payment/pay`, { plan: plan, coupon: coupon }, { withCredentials: true })
     if (res.data.success)
       window.location.href = res.data.url
     else
@@ -77,6 +88,19 @@ function SignupFormStep3() {
                     </div>
                   </button>)
                 }
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" placeholder="Coupon Code" value={coupon} onChange={(x) => setCoupon(x.target.value)} />
+                  <button class="btn btn-primary" type="button" onClick={checkCoupon}>Check</button>
+                  {
+                    couponValid === null
+                      ?
+                      null
+                      :
+                      couponValid === true
+                        ? '\u2705'
+                        : '\u274C'
+                  }
+                </div>
 
                 <Button variant="primary" type="submit" className='rounded-pill w-100 mt-3'>
                   Confirm

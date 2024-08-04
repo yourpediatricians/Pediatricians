@@ -170,14 +170,15 @@ module.exports.logoutUser = (req, res) => {
 
 module.exports.getUserInfo = (req, res) => {
   const user = req.user
-  if(user) {
+  if (user) {
     return res.json({
       success: true,
       userInfo: {
         _id: user._id,
         name: user.userInfo.name,
         email: user.accountInfo.email,
-        plan: user.userInfo.subscription.plan
+        plan: user.userInfo.subscription.plan,
+        expiry: user.userInfo.subscription.expiry
       }
     })
   } else {

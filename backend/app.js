@@ -8,6 +8,7 @@ const connectDB = require("./config/database");
 
 const userRoutes = require("./routes/userRoutes");
 const planRoutes = require("./routes/planRoutes");
+const couponRoutes = require("./routes/couponRoutes");
 const paymentRoutes = require("./routes/paymentRoutes");
 
 const { initUser } = require('./middlewares/authProtect')
@@ -37,6 +38,7 @@ app.use(initUser)
 
 app.use("/users", userRoutes);
 app.use("/plans", planRoutes);
+app.use("/coupons", couponRoutes);
 app.use("/payment", paymentRoutes);
 
 app.use("/", (req, res) => {
