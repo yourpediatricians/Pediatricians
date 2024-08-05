@@ -78,7 +78,7 @@ module.exports.initPayment = async (req, res) => {
     const res = await axios.request(options)
     response = res.data
   } catch (err) {
-    // console.log(err)
+    console.log(err)
     return res.json({
       success: false,
       code: err.code,
@@ -220,15 +220,9 @@ module.exports.allTransactions = async (req, res) => {
 
   if (txns.length > 0) {
     const txnStatus = await Promise.all(txns.map(async (txn) => {
-      const { txnInfo, date } = await checkStatus(txn)
+      const txnInfo = await Txn.findById(txn)
       if (txnInfo) {
-        return {
-          code: txnInfo.code,
-          txnId: txnInfo.data.transactionId,
-          amount: txnInfo.data.amount,
-          state: txnInfo.data.state,
-          date: date
-        }
+        return txnInfo
       }
     }))
 

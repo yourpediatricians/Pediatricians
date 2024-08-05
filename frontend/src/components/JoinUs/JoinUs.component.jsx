@@ -88,9 +88,9 @@ function SignupFormStep3() {
                     </div>
                   </button>)
                 }
-                <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="Coupon Code" value={coupon} onChange={(x) => setCoupon(x.target.value)} />
-                  <button class="btn btn-primary" type="button" onClick={checkCoupon}>Check</button>
+                <div className="input-group mb-3">
+                  <input type="text" className="form-control" placeholder="Coupon Code" value={coupon} onChange={(x) => setCoupon(x.target.value)} />
+                  <button className="btn btn-primary" type="button" onClick={checkCoupon}>Check</button>
                   {
                     couponValid === null
                       ?
