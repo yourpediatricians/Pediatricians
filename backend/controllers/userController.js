@@ -177,6 +177,7 @@ module.exports.getUserInfo = (req, res) => {
         _id: user._id,
         name: user.userInfo.name,
         email: user.accountInfo.email,
+        isActive: user.userInfo.subscription.active,
         plan: user.userInfo.subscription.plan,
         expiry: user.userInfo.subscription.expiry
       }

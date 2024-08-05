@@ -14,7 +14,7 @@ function Navigation() {
   const { curUser, updateCurUser } = useAuth()
   const { setLoading } = useLoading()
   const [expanded, setExpanded] = useState(false)
-  let expiry
+  let expiry = 0
 
   if (curUser) {
     let Difference_In_Time = new Date(curUser.expiry).getTime() - new Date().getTime()
@@ -56,14 +56,14 @@ function Navigation() {
                 ?
                 <>
                   {
-                    curUser.plan === 'NA'
+                    curUser.isActive
                       ?
+                      <span className='my-md-auto mb-2'>{expiry} Days left!</span>
+                      :
                       <>
                         <span className='my-md-auto mb-2'>Welcome back, {curUser.name}</span>
                         <Link to='/join'><Button className='ms-3 mb-2 mb-lg-0'>Join Us</Button></Link>
                       </>
-                      :
-                      <span className='my-md-auto mb-2'>{expiry} Days left!</span>
                   }
                   <Link to='/profile'><Button className='ms-3 mb-2 mb-lg-0'>Profile</Button></Link>
                   <Link><Button className='ms-3' onClick={logout}>Log Out</Button></Link>
